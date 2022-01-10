@@ -8,7 +8,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     TKN_VERSION=0.20.0 \
     MAVEN_VERSION=3.6.3 \
     JDK_VERSION=11 \
-    YQ_VERSION=2.4.1 \
+    YQ_VERSION=4.16.2 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
