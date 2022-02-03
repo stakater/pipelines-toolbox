@@ -7,15 +7,19 @@ ENV GLIBC_VERSION=2.30-r0 \
     KUBECTL_VERSION=v1.20.6 \
     TKN_VERSION=0.20.0 \
     MAVEN_VERSION=3.6.3 \
+    NODEJS_VERSION=14 \
     JDK_VERSION=11 \
     YQ_VERSION=v4.16.2 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
+# add Nodejs Version to nodejs.module file
+RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module &
+
 # install packages
-RUN microdnf install -y \
-        bash curl wget tar gzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps podman iptables openssl && \
+RUN microdnf install -y \    
+    bash curl wget tar gzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 
