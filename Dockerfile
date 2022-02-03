@@ -14,7 +14,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     HELM_VERSION=3.6.1 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
-# Add Nodejs Version to nodejs.module file
+# add Nodejs Version to nodejs.module file
 RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module &
 
 # install packages
