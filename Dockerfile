@@ -9,7 +9,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     MAVEN_VERSION=3.6.3 \
     NODEJS_VERSION=14 \
     JDK_VERSION=11 \
-    YQ_VERSION=v4.16.2 \
+    YQ_VERSION=v4.22.1 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
