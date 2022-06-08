@@ -81,8 +81,8 @@ RUN for f in "/etc/passwd" "/projects"; do \
       chmod -R g+rwX ${f}; \
     done
 
-# install unzip 
-RUN yum install unzip -y
+# install unzip & buildah
+RUN yum install unzip buildah -y
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
