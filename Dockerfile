@@ -19,7 +19,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=ena
 
 # install packages
 RUN microdnf install -y \    
-    bash curl wget tar gzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils && \
+    bash curl wget tar gzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 
@@ -80,5 +80,14 @@ RUN for f in "/etc/passwd" "/projects"; do \
       echo "Changing permissions on ${f}" && chgrp -R 0 ${f} && \
       chmod -R g+rwX ${f}; \
     done
+
+# install unzip 
+RUN yum install unzip -y
+
+# install aws cli
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    echo "Installed AWS CLI"
 
 WORKDIR /projects
