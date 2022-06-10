@@ -83,9 +83,9 @@ RUN for f in "/etc/passwd" "/projects"; do \
     done
 
 # Install sonarqube scanner
-RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip \
- && unzip sonar-scanner-cli-4.2.0.1873-linux.zip \
- && mv sonar-scanner-4.2.0.1873-linux /usr/local/bin
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
+  unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
+  mv sonar-scanner-4.2.0.1873-linux /usr/local/bin
 # install unzip & buildah
 RUN yum install unzip buildah -y
 
