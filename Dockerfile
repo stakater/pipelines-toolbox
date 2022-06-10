@@ -19,7 +19,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=ena
 
 # install packages
 RUN microdnf install -y \    
-    bash curl wget tar gzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
+    bash curl wget tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 
@@ -72,6 +72,7 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/
   mv apache-maven-$MAVEN_VERSION /usr/lib/mvn && \
     echo "Installed maven"
 
+
 # configure Java
 ENV JAVA_HOME ${GRAALVM_HOME}
 
@@ -81,6 +82,10 @@ RUN for f in "/etc/passwd" "/projects"; do \
       chmod -R g+rwX ${f}; \
     done
 
+# Install sonarqube scanner
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
+  unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
+  mv sonar-scanner-4.2.0.1873-linux /usr/local/bin
 # install unzip & buildah
 RUN yum install unzip buildah -y
 
