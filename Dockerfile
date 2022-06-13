@@ -85,9 +85,11 @@ RUN for f in "/etc/passwd" "/projects"; do \
 # Install sonarqube scanner
 RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
   unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
-  mv sonar-scanner-4.2.0.1873-linux/bin/* /usr/local/bin
+
+  mv sonar-scanner-4.2.0.1873-linux /var/opt
+
 # install unzip & buildah
-RUN yum install unzip buildah -y
+RUN yum install buildah -y
 
 # install aws cli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
