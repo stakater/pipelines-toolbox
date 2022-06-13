@@ -87,7 +87,7 @@ RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-s
   unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
   mv sonar-scanner-4.2.0.1873-linux /var/opt
 ENV PATH="/var/opt/sonar-scanner-4.2.0.1873-linux/bin:${PATH}"
-  echo "sonarqube-scanner installed"
+RUN echo "sonarqube-scanner installed"
 
 # install unzip & buildah
 RUN yum install buildah -y
