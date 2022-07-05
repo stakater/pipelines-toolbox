@@ -103,6 +103,6 @@ RUN npm install -g yarn
 
 # install chromium
 RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-RUN dnf install -y chromium-headless
+RUN dnf install -y chromium
     
 WORKDIR /projects
