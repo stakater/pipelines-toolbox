@@ -15,7 +15,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
 # add Nodejs Version to nodejs.module file
-RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module &
+RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module
 
 # install packages
 RUN microdnf install -y \    
@@ -97,5 +97,12 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     unzip awscliv2.zip && \
     ./aws/install && \
     echo "Installed AWS CLI"
+
+# install yarn
+RUN npm install -g yarn
+
+# install chrome
+COPY repos/*.repo /etc/yum.repos.d/
+RUN dnf -y install xdg-utils liberation-fonts google-chrome
 
 WORKDIR /projects
