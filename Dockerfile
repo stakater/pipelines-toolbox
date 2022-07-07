@@ -102,7 +102,15 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN npm install -g yarn
 
 # install chrome
+USER root
 COPY repos/*.repo /etc/yum.repos.d/
 RUN dnf -y install xdg-utils liberation-fonts google-chrome
+
+# Clean up
+RUN dnf clean all && \
+    rm -rf /var/cache/* && \
+    rm -rf node_modules/* 
+    
+USER 1001
 
 WORKDIR /projects
