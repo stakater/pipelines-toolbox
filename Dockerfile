@@ -101,8 +101,8 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # install yarn
 RUN npm install -g yarn
 
-# install chromium
-RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-RUN dnf install -y chromium
-    
+# install chrome
+COPY repos/*.repo /etc/yum.repos.d/
+RUN dnf -y install xdg-utils liberation-fonts google-chrome
+
 WORKDIR /projects
