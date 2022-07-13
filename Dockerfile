@@ -19,7 +19,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=ena
 
 # install packages
 RUN microdnf install -y \    
-    bash curl wget jq tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
+    bash curl wget tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 
@@ -72,7 +72,9 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/
   mv apache-maven-$MAVEN_VERSION /usr/lib/mvn && \
     echo "Installed maven"
 
-
+RUN wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
+   chmod +x ./jq && \
+   mv jq /usr/bin
 # configure Java
 ENV JAVA_HOME ${GRAALVM_HOME}
 
