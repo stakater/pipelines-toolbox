@@ -19,7 +19,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=ena
 
 # install packages
 RUN microdnf install -y \    
-    bash curl wget tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
+    bash curl wget jq tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python36 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 
