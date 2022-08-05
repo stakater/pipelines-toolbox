@@ -12,7 +12,12 @@ ENV GLIBC_VERSION=2.30-r0 \
     YQ_VERSION=v4.22.1 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
+    HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
+
+# Create Home directory which has permissions for all users. issue https://github.com/tektoncd/pipeline/issues/2013
+RUN mkdir $HOME && \
+    chmod -R a+rw $HOME
 
 # add Nodejs Version to nodejs.module file
 RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module
