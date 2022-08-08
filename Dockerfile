@@ -110,6 +110,7 @@ RUN npm install -g yarn
 # install chrome
 COPY repos/*.repo /etc/yum.repos.d/
 RUN dnf -y install xdg-utils liberation-fonts google-chrome
-RUN chmod -R a+rw $HOME
+RUN chmod -R a+rw $HOME && \
+  chmod -R a+rw $HOME/.config
 
 WORKDIR /projects
