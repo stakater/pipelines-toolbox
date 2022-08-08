@@ -16,8 +16,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
 # Create Home directory which has permissions for all users. issue https://github.com/tektoncd/pipeline/issues/2013
-RUN mkdir $HOME && \
-    chmod -R a+rw $HOME
+RUN mkdir $HOME 
 
 # add Nodejs Version to nodejs.module file
 RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module
@@ -111,5 +110,6 @@ RUN npm install -g yarn
 # install chrome
 COPY repos/*.repo /etc/yum.repos.d/
 RUN dnf -y install xdg-utils liberation-fonts google-chrome
+RUN chmod -R a+rw $HOME
 
 WORKDIR /projects
