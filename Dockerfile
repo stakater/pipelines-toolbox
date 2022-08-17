@@ -12,6 +12,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     YQ_VERSION=v4.22.1 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
+    KUBECONFORM=v0.4.14 \
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
@@ -103,6 +104,12 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     unzip awscliv2.zip && \
     ./aws/install && \
     echo "Installed AWS CLI"
+
+# install kubeconform (https://github.com/yannh/kubeconform/releases)
+RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kubeconform-linux-amd64.tar.gz && tar zxvf kubeconform-linux-amd64.tar.gz && \ 
+    chmod +x kubeconform && mv kubeconform /usr/local/bin && \
+    kubeconform -v && \
+    echo "Installed kubeconform-"${KUBECONFORM}
 
 # install yarn
 RUN npm install -g yarn
