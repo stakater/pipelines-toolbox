@@ -111,6 +111,9 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
 
+# install openapi2jsonschema
+RUN pip3 install openapi2jsonschema
+
 # install yarn
 RUN npm install -g yarn
 
