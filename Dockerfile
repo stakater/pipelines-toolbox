@@ -108,7 +108,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # install kubeconform (https://github.com/yannh/kubeconform/releases)
 RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kubeconform-linux-amd64.tar.gz && tar zxvf kubeconform-linux-amd64.tar.gz && \ 
     chmod +x kubeconform && mv kubeconform /usr/local/bin && \
-    kubeconform version && \
+    kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
 
 # install yarn
