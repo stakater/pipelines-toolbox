@@ -123,6 +123,9 @@ RUN npm install -g yarn
 COPY repos/*.repo /etc/yum.repos.d/
 RUN dnf -y install xdg-utils liberation-fonts google-chrome
 
+RUN mkdir /scripts
+COPY scripts /scripts/
+
 RUN chmod -R a+rwx $HOME 
 
 WORKDIR /projects
