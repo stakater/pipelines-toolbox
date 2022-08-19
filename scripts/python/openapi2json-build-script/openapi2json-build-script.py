@@ -95,7 +95,7 @@ def runOpenApi2Json(output_destination):
     '''
     openapi2jsonschema_location = which("openapi2jsonschema")
     command = [openapi2jsonschema_location,"-o",
-              output_destination, "--expanded", "--kubernetes","--stand-alone", "openshift-api-spec.json"]
+              output_destination, "--expanded", "--kubernetes","openshift-api-spec.json"]
 
     print("\nProcessing schemas into {}\n".format(output_destination))
     job = subprocess.Popen(
