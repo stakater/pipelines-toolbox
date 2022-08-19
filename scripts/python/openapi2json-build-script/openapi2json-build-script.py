@@ -94,7 +94,7 @@ def runOpenApi2Json(output_destination):
     )
     '''
     openapi2jsonschema_location = which("openapi2jsonschema")
-    command = [openapi2jsonschema_location,"-o","--prefix","file://{}/_definitions.json".format(output_destination),
+    command = [openapi2jsonschema_location,"--prefix","file://{}/_definitions.json".format(output_destination),"-o",
               output_destination, "--expanded", "--kubernetes","openshift-api-spec.json"]
 
     print("\nProcessing schemas into {}\n".format(output_destination))
