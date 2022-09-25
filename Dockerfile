@@ -13,6 +13,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
     KUBECONFORM=v0.4.14 \
+    ROX_VERSION=3.63.0 \    
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
@@ -89,7 +90,7 @@ RUN for f in "/etc/passwd" "/projects"; do \
       chmod -R g+rwX ${f}; \
     done
 
-# Install sonarqube scanner
+# install sonarqube scanner
 RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
   unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
   mv sonar-scanner-4.2.0.1873-linux /var/opt
@@ -116,6 +117,11 @@ RUN pip3 install locust && \
     locust --help && \
     echo "Installed locust"
 
+# roxctl client
+RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
+    chmod +x /usr/local/bin/roxctl && \
+    echo "🦜🦜🦜🦜🦜"
+    
 # install yarn
 RUN npm install -g yarn
 
