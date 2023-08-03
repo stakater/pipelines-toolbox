@@ -36,4 +36,4 @@ if __name__ == "__main__":
             if commit['hash'] == hash:
               print("Found hash in PR")
               print(pull_request_id)
-              return
+              break
