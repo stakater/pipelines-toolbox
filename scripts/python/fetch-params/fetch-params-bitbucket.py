@@ -16,19 +16,9 @@ def send_api_request(url, username, password):
      print(f"Error occurred during the API request: {e}")
      return None
 
-# def get_pr_number_from_hash(hash)
+def fetch_params(provider, username, password, hash, workspace, repository):
 
-if __name__ == "__main__":
-
-    provider = "bitbucket"
-    if provider == "bitbucket":
-
-      username = "asfamumtaz"
-      password = "ATBBsvFHFwZmFuEkCXYMp9eAczAh6FDF9827"
-      workspace = "rabbitmqwebhook"
-      repository = "rabbitmq-test"
-
-      hash = "43ec2e8e5342568f52c44c0987e79bd321cbb22a"
+    if provider == "bitbucket-cloud":
 
       url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests"
 
@@ -45,6 +35,6 @@ if __name__ == "__main__":
           for commit in commits['values']:
             print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
             if commit['hash'] == hash:
-              print("Found hash in PR {pull_request_id}")
+              print(f"Found hash in PR {pull_request_id}")
               found = True
               break
