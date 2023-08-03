@@ -60,14 +60,22 @@ def send_api_request():
 
         parsed_data = json.loads(response.text)
 
+       url = f"https://api.bitbucket.org/2.0/repositories/{owner}/{repo}/pullrequests/{pull_request_id}/commits"
+       commits = get_all_commits_in_pull_request(owner, repo, pull_request_id, username, password)
 
         id_related_to_hash = None
-        for item in parsed_data['values']:
-            print(item['id'])
-            print(item['source']['commit']['hash'])
-            if item['source']['commit']['hash'] == hash:
-                id_related_to_hash = item['id']
-                break
+        for pull_request in parsed_data['values']:
+            pull_request_id = pull_request['id']
+            commits = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests/{pull_request_id}/commits"
+        if commits:
+          for commit in commits['values']:
+            print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
+
+
+#             print(item['source']['commit']['hash'])
+#             if item['source']['commit']['hash'] == hash:
+#                 id_related_to_hash = item['id']
+#                 break
 
         print("The id related to the hash {hash} is:", id_related_to_hash)
 
