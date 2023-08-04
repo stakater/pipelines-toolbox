@@ -16,7 +16,7 @@ def send_api_request(url, username, password):
      print(f"Error occurred during the API request: {e}")
      return None
 
-def fetch_params(provider, username, password, hash, workspace, repository):
+def fetch_params_bitbucket(provider, username, password, hash, workspace, repository):
 
     if provider == "bitbucket-cloud":
 
