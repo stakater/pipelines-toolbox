@@ -52,12 +52,12 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("provider", type=string, help="The number for which to calculate square and cube.")
-    parser.add_argument("username", type=string, help="The number for which to calculate square and cube.")
-    parser.add_argument("password", type=string, help="The number for which to calculate square and cube.")
-    parser.add_argument("hash", type=string, help="The number for which to calculate square and cube.")
-    parser.add_argument("workspace", type=string, help="The number for which to calculate square and cube.")
-    parser.add_argument("repository", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("provider", help="The number for which to calculate square and cube.")
+    parser.add_argument("username", help="The number for which to calculate square and cube.")
+    parser.add_argument("password", help="The number for which to calculate square and cube.")
+    parser.add_argument("hash", help="The number for which to calculate square and cube.")
+    parser.add_argument("workspace", help="The number for which to calculate square and cube.")
+    parser.add_argument("repository",  help="The number for which to calculate square and cube.")
     args = parser.parse_args()
     fetch_params_bitbucket(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
 #     main(args)
