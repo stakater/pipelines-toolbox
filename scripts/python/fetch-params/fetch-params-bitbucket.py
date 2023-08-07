@@ -59,6 +59,7 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("script", help="The number for which to calculate square and cube.")
     parser.add_argument("provider", help="The number for which to calculate square and cube.")
     parser.add_argument("username", help="The number for which to calculate square and cube.")
     parser.add_argument("password", help="The number for which to calculate square and cube.")
