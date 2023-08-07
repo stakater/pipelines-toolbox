@@ -38,3 +38,17 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
               print(f"Found hash in PR {pull_request_id}")
               found = True
               break
+def main(args):
+    provider = args.provider
+    username = args.username
+    password = args.password
+    hash = args.hash
+    workspace = args.workspace
+    repository = args.repository
+    fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
+
+
+
+if __name__ == "__main__":
+    args = getArgumentParser().parse_args()
+    main(args)
