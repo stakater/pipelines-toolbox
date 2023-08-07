@@ -1,6 +1,7 @@
 import json
 import requests
 from requests.auth import HTTPBasicAuth
+import argparse
 
 def send_api_request(url, username, password):
    try:
@@ -38,17 +39,25 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
               print(f"Found hash in PR {pull_request_id}")
               found = True
               break
-def main(args):
-    provider = args.provider
-    username = args.username
-    password = args.password
-    hash = args.hash
-    workspace = args.workspace
-    repository = args.repository
-    fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
+# def main(args):
+#     provider = args.provider
+#     username = args.username
+#     password = args.password
+#     hash = args.hash
+#     workspace = args.workspace
+#     repository = args.repository
+#     fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
 
 
 
 if __name__ == "__main__":
-    args = getArgumentParser().parse_args()
-    main(args)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("provider", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("username", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("password", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("hash", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("workspace", type=string, help="The number for which to calculate square and cube.")
+    parser.add_argument("repository", type=string, help="The number for which to calculate square and cube.")
+    args = parser.parse_args()
+    fetch_params_bitbucket(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+#     main(args)
