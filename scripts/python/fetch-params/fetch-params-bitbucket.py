@@ -19,13 +19,7 @@ def send_api_request(url, username, password):
 
 def fetch_params_bitbucket(provider, username, password, hash, workspace, repository):
 
-    print(f"provider: {provider}")
-    print(f"provider: {username}")
-    print(f"provider: {password}")
-    print(f"provider: {hash}")
-    print(f"provider: {workspace}")
-    print(f"provider: {hash}")
-    print(f"provider: {repository}")
+    print(f"provider: {provider}. \nusername: {username}\n password: {password}\nhash: {hash}\nworkspace: {workspace}\nrepository: {repository}")
     if provider == "bitbucket":
 
       url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests"
