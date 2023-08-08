@@ -4,9 +4,9 @@ import argparse
 
 def find_hash(provider, username, password, hash, workspace, repository):
   if provider == "bitbucket":
-    fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
+    pr_number = fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
   elif provider == "github":
-    fetch_params_github(provider, username, password, hash, workspace, repository)
+    pr_number = fetch_params_github(provider, username, password, hash, workspace, repository)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

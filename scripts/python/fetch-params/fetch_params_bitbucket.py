@@ -39,4 +39,6 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
             if commit['hash'] == hash:
               print(f"Found hash in PR {pull_request_id}")
               found = True
+              return pull_request_id
               break
+        return None
