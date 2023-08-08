@@ -1,11 +1,12 @@
-
+from fetch_params_bitbucket import fetch_params_bitbucket
+from fetch_params_github import fetch_params_github
+import argparse
 
 def find_hash(provider, username, password, hash, workspace, repository):
   if provider == "bitbucket":
-    fetch_params_bitbucket(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+    fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
   elif provider == "github":
-    fetch_params_github(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
-
+    fetch_params_github(provider, username, password, hash, workspace, repository)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -17,4 +18,3 @@ if __name__ == "__main__":
     parser.add_argument("repository",  help="Git repository name")
     args = parser.parse_args()
     find_hash(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
-#     fetch_params_bitbucket(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
