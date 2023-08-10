@@ -42,5 +42,7 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
                 found = True
                 return pull_request_id
                 break
+          else:
+            return None
+      else:
         return None
-      return None
