@@ -26,19 +26,21 @@ def fetch_params_bitbucket(provider, username, password, hash, workspace, reposi
 
       response = send_api_request(url, username, password)
       found = False
-      for pull_request in response['values']:
-        if found == True:
-          break
-        pull_request_id = pull_request['id']
-        url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests/{pull_request_id}/commits"
-        commits = send_api_request(url, username, password)
+      if response:
+        for pull_request in response['values']:
+          if found == True:
+            break
+          pull_request_id = pull_request['id']
+          url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests/{pull_request_id}/commits"
+          commits = send_api_request(url, username, password)
 
-        if commits:
-          for commit in commits['values']:
-            print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
-            if commit['hash'] == hash:
-              print(f"Found hash in PR {pull_request_id}")
-              found = True
-              return pull_request_id
-              break
+          if commits:
+            for commit in commits['values']:
+              print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
+              if commit['hash'] == hash:
+                print(f"Found hash in PR {pull_request_id}")
+                found = True
+                return pull_request_id
+                break
         return None
+      return None
