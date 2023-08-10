@@ -17,4 +17,5 @@ if __name__ == "__main__":
     parser.add_argument("workspace", help="Workspace/Organization")
     parser.add_argument("repository",  help="Git repository name")
     args = parser.parse_args()
-    find_hash(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+    pr_number = find_hash(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+    print(pr_number)
