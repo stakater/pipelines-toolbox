@@ -3,11 +3,12 @@ from fetch_params_github import fetch_params_github
 import argparse
 
 def find_hash(provider, username, password, hash, workspace, repository):
+  pr_number = None
   if provider == "bitbucket":
     pr_number = fetch_params_bitbucket(provider, username, password, hash, workspace, repository)
   elif provider == "github":
     pr_number = fetch_params_github(provider, username, password, hash, workspace, repository)
-
+  return pr_number
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("provider", help="Name of git provider")
@@ -17,4 +18,5 @@ if __name__ == "__main__":
     parser.add_argument("workspace", help="Workspace/Organization")
     parser.add_argument("repository",  help="Git repository name")
     args = parser.parse_args()
-    find_hash(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+    pr_number = find_hash(args.provider, args.username, args.password, args.hash, args.workspace, args.repository)
+    print(pr_number)
