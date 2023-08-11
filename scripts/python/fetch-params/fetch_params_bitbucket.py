@@ -17,32 +17,36 @@ def send_api_request(url, username, password):
      print(f"Error occurred during the API request: {e}")
      return None
 
-def fetch_params_bitbucket(provider, username, password, hash, workspace, repository):
+def fetch_params_bitbucket(provider, username, password, hash, workspace, repository, url):
 
-    print(f"provider: {provider} \nusername: {username}\npassword: {password}\nhash: {hash}\nworkspace: {workspace}\nrepository: {repository}")
-    if provider == "bitbucket":
-
+    if provider == "bitbucket-cloud":
+      url = f"{url}/{workspace}/{repository}/pullrequests"
+    else:
       url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests"
+    print(f"provider: {provider} \nusername: {username}\npassword: {password}\nhash: {hash}\nworkspace: {workspace}\nrepository: {repository}")
+    response = send_api_request(url, username, password)
+    found = False
 
-      response = send_api_request(url, username, password)
-      found = False
-      if response:
-        for pull_request in response['values']:
-          if found == True:
-            break
-          pull_request_id = pull_request['id']
+    if response:
+      for pull_request in response['values']:
+        if found == True:
+          break
+        pull_request_id = pull_request['id']
+        if provider == "bitbucket-cloud":
+          url = f"{url}/{workspace}/{repository}/pullrequests/{pull_request_id}/commits"
+        else:
           url = f"https://api.bitbucket.org/2.0/repositories/{workspace}/{repository}/pullrequests/{pull_request_id}/commits"
-          commits = send_api_request(url, username, password)
+        commits = send_api_request(url, username, password)
 
-          if commits:
-            for commit in commits['values']:
-              print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
-              if commit['hash'] == hash:
-                print(f"Found hash in PR {pull_request_id}")
-                found = True
-                return pull_request_id
-                break
-          else:
-            return None
-      else:
-        return None
+        if commits:
+          for commit in commits['values']:
+            print(f"Commit ID: {commit['hash']}, Author: {commit['author']['raw']}, Message: {commit['message']}")
+            if commit['hash'] == hash:
+              print(f"Found hash in PR {pull_request_id}")
+              found = True
+              return pull_request_id
+              break
+        else:
+          return None
+    else:
+      return None
