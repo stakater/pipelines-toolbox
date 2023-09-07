@@ -114,7 +114,7 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
 
 # install locust ( https://docs.locust.io/en/stable )
 RUN pip3 install locust && \
-    locust --help && \
+    locust -V && \
     echo "Installed locust"
 
 # roxctl client
