@@ -13,7 +13,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.6.1 \
     KUBECONFORM=v0.4.14 \
-    ROX_VERSION=3.63.0 \    
+    ROX_VERSION=3.70.2 \    
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
