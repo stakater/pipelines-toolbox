@@ -67,6 +67,9 @@ RUN cd /tmp && \
 # install jinja2 cli
 RUN pip3 install j2cli && \
     echo "Installed jinja2 cli"
+    
+RUN pip3 install requests && \
+    echo "Installed requests package"
 
 # install maven
 ENV MAVEN_HOME /usr/lib/mvn
