@@ -28,7 +28,7 @@ def fetch_params_github(provider, username, password, hash, workspace, repositor
         for pr in pull_requests:
           pull_request_id = pr['number']
           url = f"https://api.github.com/repos/{workspace}/{repository}/pulls/{pull_request_id}/commits"
-          commits = send_api_request_github(url,"", password, "github")
+          commits = send_api_request_github(url, password)
           if commits:
             for commit in commits:
               print(f"Commit SHA: {commit['sha']}")
