@@ -112,10 +112,6 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
 
-# install locust ( https://docs.locust.io/en/stable )
-RUN pip3 install locust && \
-    locust -V && \
-    echo "Installed locust"
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
