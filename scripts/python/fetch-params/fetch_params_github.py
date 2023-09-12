@@ -24,8 +24,11 @@ def fetch_params_github(provider, username, password, hash, workspace, repositor
       url = f"https://api.github.com/repos/{workspace}/{repository}/pulls"
       print(url)
       pull_requests =  send_api_request_github(url, password)
+      found = False
       if pull_requests:
         for pr in pull_requests:
+          if found == True:
+          break 
           pull_request_id = pr['number']
           url = f"https://api.github.com/repos/{workspace}/{repository}/pulls/{pull_request_id}/commits"
           commits = send_api_request_github(url, password)
@@ -35,4 +38,9 @@ def fetch_params_github(provider, username, password, hash, workspace, repositor
               if commit['sha'] == hash:
                 print(f"Found hash in PR {pull_request_id}")
                 found = True
+                return pull_request_id
                 break
+          else:
+             return None
+      else:
+         return None
