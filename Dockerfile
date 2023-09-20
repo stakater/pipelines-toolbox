@@ -13,7 +13,8 @@ ENV GLIBC_VERSION=2.30-r0 \
     ARGOCD_VERSION=v2.1.5 \
     HELM_VERSION=3.11.3 \
     KUBECONFORM=v0.4.14 \
-    ROX_VERSION=3.70.2 \    
+    ROX_VERSION=3.70.2 \
+    ANSIBLE_VERSION=2.12.1 \
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
@@ -116,6 +117,10 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
 RUN pip3 install locust && \
     locust -V && \
     echo "Installed locust"
+
+# install ansible
+RUN python3 -m pip install --user ansible && \
+    python3 -m pip install --user ansible-core==${ANSIBLE_VERSION}
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
