@@ -120,7 +120,10 @@ RUN pip3 install locust && \
 
 # install ansible
 RUN python3 -m pip install --user ansible && \
-    python3 -m pip install --user ansible-core==${ANSIBLE_VERSION}
+    python3 -m pip install --user ansible-core==${ANSIBLE_VERSION} && \
+    pip3 install openshift pyyaml kubernetes && \
+    PATH=$PATH:/opt/root/.local/bin && \
+    ansible-galaxy collection install kubernetes.core
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
