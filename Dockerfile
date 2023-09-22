@@ -125,6 +125,9 @@ RUN python3 -m pip install --user ansible && \
     ansible-galaxy collection install kubernetes.core
 
 RUN /opt/root/.local/bin/ansible --version
+# Install Ansible inventory file.
+RUN mkdir -p /etc/ansible
+RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
