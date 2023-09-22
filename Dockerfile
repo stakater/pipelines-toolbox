@@ -120,7 +120,7 @@ RUN pip3 install locust && \
 
 # install ansible
 RUN python3 -m pip install --user ansible && \
-    python3 -m pip install --user ansible-core==${ANSIBLE_VERSION} && \
+    python3 -m pip install --user ansible-core && \
     pip3 install openshift pyyaml kubernetes && \
     ansible --version && \
     PATH=$PATH:/opt/root/.local/bin && \
