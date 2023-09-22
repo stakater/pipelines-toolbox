@@ -120,7 +120,6 @@ RUN pip3 install locust && \
 
 # install ansible
 RUN python3 -m pip install --user ansible && \
-    python3 -m pip install --user ansible && \
     pip3 install openshift pyyaml kubernetes && \
     PATH=$PATH:/opt/root/.local/bin && \
     ansible-galaxy collection install kubernetes.core
