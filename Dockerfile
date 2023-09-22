@@ -126,7 +126,7 @@ RUN python3 -m pip install --user ansible && \
     ansible-galaxy collection install kubernetes.core
 
 RUN which ansible &&\
-    ansible --version
+    /opt/root/.local/bin/ansible --version
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
