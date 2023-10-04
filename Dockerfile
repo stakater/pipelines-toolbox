@@ -119,6 +119,7 @@ RUN pip3 install locust && \
     echo "Installed locust"
 
 # install ansible
+RUN microdnf install -y shadow-utils
 RUN useradd ansible ;  echo "" | passwd --stdin ansible
 RUN echo "ansible ALL=(ALL) NOPASSWD: ALL ">> /etc/sudoers
 RUN python3 -m pip install --user ansible && \
