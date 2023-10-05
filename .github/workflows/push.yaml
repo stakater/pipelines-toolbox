@@ -68,7 +68,7 @@ jobs:
 
     - name: Notify Failure
       if: failure()
-      uses: mshick/add-pr-comment@v1
+      uses: mshick/add-pr-comment@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
