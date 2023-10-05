@@ -19,13 +19,13 @@ ENV GLIBC_VERSION=2.30-r0 \
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
 
 # Create Home directory which has permissions for all users. issue https://github.com/tektoncd/pipeline/issues/2013
-RUN mkdir $HOME 
+RUN mkdir $HOME
 
 # add Nodejs Version to nodejs.module file
 RUN echo -e "[nodejs]\nname=nodejs\nstream=$NODEJS_VERSION\nprofiles=\nstate=enabled\n" > /etc/dnf/modules.d/nodejs.module
 
 # install packages
-RUN microdnf install -y \    
+RUN microdnf install -y \
     bash curl wget tar gzip unzip java-${JDK_VERSION}-openjdk-devel git openssh which httpd python38 procps tar podman iptables openssl nodejs nodejs-nodemon npm findutils yum && \
     microdnf -y clean all && rm -rf /var/cache/yum && \
     echo "Installed packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
@@ -108,7 +108,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     echo "Installed AWS CLI"
 
 # install kubeconform (https://github.com/yannh/kubeconform/releases)
-RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kubeconform-linux-amd64.tar.gz && tar zxvf kubeconform-linux-amd64.tar.gz && \ 
+RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kubeconform-linux-amd64.tar.gz && tar zxvf kubeconform-linux-amd64.tar.gz && \
     chmod +x kubeconform && mv kubeconform /usr/local/bin && \
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
@@ -119,7 +119,8 @@ RUN pip3 install locust && \
     echo "Installed locust"
 
 # install ansible
-RUN microdnf install -y shadow-utils
+RUN microdnf install -y \
+    shadow-utils passwd
 RUN useradd ansible ;  echo "" | passwd --stdin ansible
 RUN echo "ansible ALL=(ALL) NOPASSWD: ALL ">> /etc/sudoers
 RUN python3 -m pip install --user ansible && \
@@ -136,7 +137,7 @@ RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
     chmod +x /usr/local/bin/roxctl && \
     echo "🦜🦜🦜🦜🦜"
-    
+
 # install yarn
 RUN npm install -g yarn
 
@@ -147,6 +148,6 @@ RUN dnf -y install xdg-utils liberation-fonts google-chrome
 RUN mkdir /scripts
 COPY scripts /scripts/
 
-RUN chmod -R a+rwx $HOME 
+RUN chmod -R a+rwx $HOME
 
 WORKDIR /projects
