@@ -93,7 +93,7 @@ RUN for f in "/etc/passwd" "/projects"; do \
 
 # install sonarqube scanner
 RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
-  unzip sonar-scanner-cli-4.2.0.1873-linux.zip  && \
+  unzip sonar-scanner-cli-4.2.0.1873-linux.zip && \
   mv sonar-scanner-4.2.0.1873-linux /var/opt
 ENV PATH="/var/opt/sonar-scanner-4.2.0.1873-linux/bin:${PATH}"
 RUN echo "sonarqube-scanner installed"
@@ -121,7 +121,7 @@ RUN pip3 install locust && \
 # install ansible
 RUN microdnf install -y \
     shadow-utils passwd
-RUN useradd ansible ;  echo "" | passwd --stdin ansible
+RUN useradd ansible; echo "Docker!" | passwd --stdin ansible
 RUN echo "ansible ALL=(ALL) NOPASSWD: ALL ">> /etc/sudoers
 RUN python3 -m pip install --user ansible && \
     pip3 install openshift pyyaml kubernetes && \
