@@ -135,8 +135,7 @@ RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 # roxctl client
 RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/assets/${ROX_VERSION}/bin/Linux/roxctl && \
-    chmod +x /usr/local/bin/roxctl && \
-    echo "🦜🦜🦜🦜🦜"
+    chmod +x /usr/local/bin/roxctl
 
 # install yarn
 RUN npm install -g yarn
