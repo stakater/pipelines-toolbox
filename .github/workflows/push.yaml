@@ -7,9 +7,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     name: Build
-    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"    
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     steps:
     - name: Check out code
       uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
     - name: Push Latest Tag
       uses: anothrNick/github-tag-action@1.67.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
         WITH_V: true
         RELEASE_BRANCHES: main
         DEFAULT_BUMP: patch
