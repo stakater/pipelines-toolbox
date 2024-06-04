@@ -95,9 +95,9 @@ RUN for f in "/etc/passwd" "/projects"; do \
     done
 
 # install sonarqube scanner
-RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip && \
-  unzip sonar-scanner-cli-4.2.0.1873-linux.zip && \
-  mv sonar-scanner-4.2.0.1873-linux /var/opt
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.0.0.4432-linux.zip && \
+unzip sonar-scanner-cli-6.0.0.4432-linux.zip && \
+mv sonar-scanner-6.0.0.4432-linux /var/opt
 ENV PATH="/var/opt/sonar-scanner-4.2.0.1873-linux/bin:${PATH}"
 RUN echo "sonarqube-scanner installed"
 
