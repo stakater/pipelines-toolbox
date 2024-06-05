@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8-minimal:8.1-407
+FROM registry.access.redhat.com/ubi8-minimal:8.10-896.1716497715
 
 RUN mkdir -p /projects
 
@@ -116,7 +116,6 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
 
-
 # install ansible
 RUN microdnf install -y \
     shadow-utils passwd
@@ -140,8 +139,20 @@ RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/ass
 RUN npm install -g yarn
 
 # install chrome
-COPY repos/*.repo /etc/yum.repos.d/
-RUN dnf -y install xdg-utils liberation-fonts google-chrome
+RUN microdnf install -y gnupg && \
+    microdnf clean all
+
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/pki/rpm-gpg/RPM-GPG-KEY-google && \
+    echo "[google-chrome]\n\
+name=google-chrome\n\
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64\n\
+enabled=1\n\
+gpgcheck=1\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-google" > /etc/yum.repos.d/google-chrome.repo
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
+    rpm -ivh google-chrome-stable_current_x86_64.rpm && \
+    rm -f google-chrome-stable_current_x86_64.rpm
 
 RUN mkdir /scripts
 COPY scripts /scripts/
