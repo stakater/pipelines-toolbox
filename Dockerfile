@@ -15,8 +15,10 @@ ENV GLIBC_VERSION=2.30-r0 \
     KUBECONFORM=v0.4.14 \
     ROX_VERSION=3.70.2 \
     ANSIBLE_VERSION=2.12.1 \
+    SONAR_CLI_VERSION=6.0.0.4432-linux \
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
+    
 
 # Create Home directory which has permissions for all users. issue https://github.com/tektoncd/pipeline/issues/2013
 RUN mkdir $HOME
@@ -95,9 +97,9 @@ RUN for f in "/etc/passwd" "/projects"; do \
     done
 
 # install sonarqube scanner
-RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.0.0.4432-linux.zip && \
-    unzip sonar-scanner-cli-6.0.0.4432-linux.zip && mv sonar-scanner-6.0.0.4432-linux /var/opt
-ENV PATH="/var/opt/sonar-scanner-6.0.0.4432-linux/bin:${PATH}"
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_CLI_VERSION}.zip && \
+    unzip sonar-scanner-cli-${SONAR_CLI_VERSION}.zip && mv sonar-scanner-${SONAR_CLI_VERSION} /var/opt
+ENV PATH="/var/opt/sonar-scanner-${SONAR_CLI_VERSION}/bin:${PATH}"
 RUN echo "sonarqube-scanner installed"
 
 # install unzip & buildah
@@ -138,11 +140,6 @@ RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/ass
 # install yarn
 RUN npm install -g yarn
 
-# install chrome
-COPY repos/*.repo /etc/yum.repos.d/
-RUN dnf -y install xdg-utils  
-RUN dnf -y install liberation-fonts
-RUN dnf -y install google-chrome
 RUN mkdir /scripts
 COPY scripts /scripts/
 
