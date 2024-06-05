@@ -140,19 +140,7 @@ RUN npm install -g yarn
 
 # install chrome
 COPY repos/*.repo /etc/yum.repos.d/
-RUN dnf -y install xdg-utils liberation-fonts 
-RUN dnf config-manager --set-enabled google-chrome && \
-    tee /etc/yum.repos.d/google-chrome.repo <<EOF
-[google-chrome]
-name=google-chrome - \$basearch
-baseurl=https://dl.google.com/linux/chrome/rpm/stable/\$basearch
-enabled=1
-gpgcheck=1
-gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-EOF
-
-# Install Google Chrome
-RUN dnf -y install google-chrome-stable
+RUN dnf -y install xdg-utils liberation-fonts google-chrome
 
 RUN mkdir /scripts
 COPY scripts /scripts/
