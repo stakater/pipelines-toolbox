@@ -150,8 +150,9 @@ enabled=1\n\
 gpgcheck=1\n\
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-google" > /etc/yum.repos.d/google-chrome.repo
 
-RUN microdnf install -y google-chrome-stable xdg-utils liberation-fonts && \
-    microdnf clean all
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
+    rpm -ivh google-chrome-stable_current_x86_64.rpm && \
+    rm -f google-chrome-stable_current_x86_64.rpm
 
 RUN mkdir /scripts
 COPY scripts /scripts/
