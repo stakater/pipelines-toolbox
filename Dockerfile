@@ -116,7 +116,6 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
 
-
 # install ansible
 RUN microdnf install -y \
     shadow-utils passwd
@@ -140,8 +139,21 @@ RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/ass
 RUN npm install -g yarn
 
 # install chrome
-COPY repos/*.repo /etc/yum.repos.d/
-RUN dnf -y install xdg-utils liberation-fonts google-chrome
+RUN microdnf install -y gnupg && \
+    microdnf clean all
+
+# Add Google Chrome repository
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/pki/rpm-gpg/RPM-GPG-KEY-google && \
+    echo "[google-chrome]
+name=google-chrome
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-google" > /etc/yum.repos.d/google-chrome.repo
+
+# Install Google Chrome
+RUN microdnf install -y google-chrome-stable xdg-utils liberation-fonts && \
+    microdnf clean all
 
 RUN mkdir /scripts
 COPY scripts /scripts/
