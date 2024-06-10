@@ -139,9 +139,39 @@ RUN curl -sL -o /usr/local/bin/roxctl https://mirror.openshift.com/pub/rhacs/ass
 # install yarn
 RUN npm install -g yarn
 
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/l/liberation-fonts-common-2.00.5-1.fc30.noarch.rpm    && \
+    rpm -ivh liberation-fonts-common-2.00.5-1.fc30.noarch.rpm    && \
+    rm liberation-fonts-common-2.00.5-1.fc30.noarch.rpm
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/l/liberation-mono-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rpm -ivh liberation-mono-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rm liberation-mono-fonts-2.00.5-1.fc30.noarch.rpm
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/l/liberation-sans-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rpm -ivh liberation-sans-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rm liberation-sans-fonts-2.00.5-1.fc30.noarch.rpm
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/l/liberation-serif-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rpm -ivh liberation-serif-fonts-2.00.5-1.fc30.noarch.rpm    && \
+    rm liberation-serif-fonts-2.00.5-1.fc30.noarch.rpm
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/l/liberation-fonts-2.00.5-1.fc30.noarch.rpm && \
+    rpm -ivh liberation-fonts-2.00.5-1.fc30.noarch.rpm && \
+    rm liberation-fonts-2.00.5-1.fc30.noarch.rpm
+
+
 # install chrome
-COPY repos/*.repo /etc/yum.repos.d/
-RUN dnf -y install xdg-utils liberation-fonts google-chrome
+COPY ./rhsm-entitlement /etc/pki/entitlement
+RUN rm /etc/rhsm-host
+
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/d/desktop-file-utils-0.23-10.fc30.x86_64.rpm && \
+  rpm -ivh desktop-file-utils-0.23-10.fc30.x86_64.rpm
+RUN wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/30/Everything/x86_64/os/Packages/x/xdg-utils-1.1.3-4.fc30.noarch.rpm  && \
+  rpm -ivh xdg-utils-1.1.3-4.fc30.noarch.rpm
+RUN sudo dnf install vulkan
+# Install Chrome
+RUN curl https://dl.google.com/linux/linux_signing_key.pub -O && rpm --import linux_signing_key.pub && \
+         curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O && rpm --checksig -v google-chrome-stable_current_x86_64.rpm && \
+         dnf install -y google-chrome-stable_current_x86_64.rpm && \
+         rm -rfv /etc/pki/entitlement && \
+         rm -fv google-chrome-stable_current_x86_64.rpm && \
+         rm -fv linux_signing_key.pub
 
 RUN mkdir /scripts
 COPY scripts /scripts/
