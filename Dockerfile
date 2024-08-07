@@ -15,7 +15,7 @@ ENV GLIBC_VERSION=2.30-r0 \
     KUBECONFORM=v0.6.7 \
     ROX_VERSION=4.5.0 \
     ANSIBLE_VERSION=2.12.1 \
-    SONAR_CLI_VERSION=6.1.0.4477-linux \
+    SONAR_CLI_VERSION=6.1.0.4477 \
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
     
