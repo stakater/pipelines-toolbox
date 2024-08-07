@@ -3,23 +3,22 @@ FROM registry.access.redhat.com/ubi8-minimal:8.1-407
 RUN mkdir -p /projects
 
 ENV GLIBC_VERSION=2.30-r0 \
-    OC_VERSION=4.8 \
-    KUBECTL_VERSION=v1.20.6 \
-    TKN_VERSION=0.20.0 \
-    MAVEN_VERSION=3.6.3 \
+    OC_VERSION=4.15 \
+    KUBECTL_VERSION=v1.28.11 \
+    TKN_VERSION=0.37.0 \
+    MAVEN_VERSION=3.9.8 \
     NODEJS_VERSION=14 \
     JDK_VERSION=11 \
-    YQ_VERSION=v4.22.1 \
-    ARGOCD_VERSION=v2.1.5 \
-    HELM_VERSION=3.11.3 \
-    KUBECONFORM=v0.4.14 \
-    ROX_VERSION=3.70.2 \
+    YQ_VERSION=v4.44.3 \
+    ARGOCD_VERSION=v2.8.4 \
+    HELM_VERSION=3.15.3 \
+    KUBECONFORM=v0.6.7 \
+    ROX_VERSION=4.5.0 \
     ANSIBLE_VERSION=2.12.1 \
-    SONAR_CLI_VERSION=6.0.0.4432-linux \
+    SONAR_CLI_VERSION=6.1.0.4477-linux \
     HOME="/opt/root"\
     JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
     
-
 # Create Home directory which has permissions for all users. issue https://github.com/tektoncd/pipeline/issues/2013
 RUN mkdir $HOME
 
@@ -116,7 +115,6 @@ RUN wget https://github.com/yannh/kubeconform/releases/download/$KUBECONFORM/kub
     chmod +x kubeconform && mv kubeconform /usr/local/bin && \
     kubeconform -v && \
     echo "Installed kubeconform-"${KUBECONFORM}
-
 
 # install ansible
 RUN microdnf install -y \
